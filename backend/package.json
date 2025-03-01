@@ -4,6 +4,8 @@
   "description": "chatbot",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "build": "echo No build step required",
     "test": "start"
   },
   "author": "sudhir",
