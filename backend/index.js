@@ -19,6 +19,25 @@ const generate = async (prompt) => {
   return result.response.text();
 };
 
+
+
+app.post('/spell-check', async (req, res) => {
+  try {
+    // Expecting a prompt in the request body
+    let { prompt } = req.body;
+    console.log("Received prompt:\n", prompt);
+    combinedPrompt = `You are an AI assistant that checks grammatical mistakes and spelling errors. Use the context below to generate your response.\n\n`;
+    prompt += combinedPrompt;
+    const generatedText = await generate(prompt);
+    console.log("Generated Text:\n", generatedText);
+    res.json({ generatedText });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
 app.post('/request', async (req, res) => {
   try {
     const { conversation } = req.body;
