@@ -191,7 +191,7 @@ function App() {
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">Gemini Chat</h1>
+              <h1 className="text-2xl font-bold text-white">AI Doctor Asst.</h1>
               <div className="flex items-center">
                 <span className="bg-green-400 w-2 h-2 rounded-full mr-2"></span>
                 <span className="text-xs text-white opacity-80">Model: Gemini 2.0 Flash</span>
