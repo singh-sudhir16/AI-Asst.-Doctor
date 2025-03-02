@@ -1,0 +1,10 @@
+services:
+  - name: ai-asst-doctor-backend
+    type: web
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - sync: false  # Set this manually in Render dashboard

@@ -1,4 +1,3 @@
-// index.js
 require('dotenv').config();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const express = require('express');
@@ -19,14 +18,15 @@ const generate = async (prompt) => {
   return result.response.text();
 };
 
-
+// API Routes
 app.post('/spell-check', async (req, res) => {
   try {
-    // Expecting a prompt in the request body
     let { prompt } = req.body;
     console.log("Received prompt:\n", prompt);
-    combinedPrompt = `You are an AI assistant that checks grammatical mistakes and spelling errors. Use the context below to generate your response.\n\n`;
+
+    const combinedPrompt = `You are an AI assistant that checks grammatical mistakes and spelling errors. Use the context below to generate your response.\n\n`;
     prompt += combinedPrompt;
+
     const generatedText = await generate(prompt);
     console.log("Generated Text:\n", generatedText);
     res.json({ generatedText });
@@ -36,20 +36,17 @@ app.post('/spell-check', async (req, res) => {
   }
 });
 
-
 app.post('/request', async (req, res) => {
   try {
     const { conversation } = req.body;
     let combinedPrompt = '';
 
     if (conversation && Array.isArray(conversation)) {
-      // Start with a system instruction to help maintain context
       combinedPrompt = `You are an AI assistant that remembers the entire conversation. Use the context below to generate your response.\n\n`;
       combinedPrompt += conversation
         .map(msg => (msg.role === 'user' ? `User: ${msg.text}` : `Assistant: ${msg.text}`))
         .join('\n');
     } else {
-      // Fallback if no conversation provided
       combinedPrompt = req.body.prompt;
     }
 
@@ -64,9 +61,8 @@ app.post('/request', async (req, res) => {
   }
 });
 
-// app.listen(3000, () => {
-//   console.log('App is running on port 3000');
-// });
-
-// for vercel deployment
-module.exports = app;
+// 🚀 Use Render's PORT
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`App is running on port ${PORT}`);
+});
