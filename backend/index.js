@@ -24,7 +24,7 @@ app.post('/spell-check', async (req, res) => {
     let { prompt } = req.body;
     console.log("Received prompt:\n", prompt);
 
-    const combinedPrompt = `You are an AI assistant that checks grammatical mistakes and spelling errors. Use the context below to generate your response.\n\n`;
+    const combinedPrompt = `You are an AI assistant that check if there is any grammatical or spelling mistakes in provided input text . Your input sentence is: \n\n`;
     prompt += combinedPrompt;
 
     const generatedText = await generate(prompt);
